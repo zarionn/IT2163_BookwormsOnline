@@ -1,0 +1,8 @@
+﻿# Ignore the file with your Gmail and reCAPTCHA keys
+appsettings.Development.json
+appsettings.json
+# Standard .NET ignore rules
+bin/
+obj/
+.vs/
+*.user

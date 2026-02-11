@@ -1,0 +1,47 @@
+﻿@page
+@model WebApplication1.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc1L2gsAAAAANuefny0SjwBlnxGp8uRQLadfaxz"></script>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-4">
+
+            <h1 class="mb-3">Login</h1>
+
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="LModel.Email"></label>
+                    <input asp-for="LModel.Email" class="form-control" />
+                    <span asp-validation-for="LModel.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="LModel.Password"></label>
+                    <input asp-for="LModel.Password" type="password" class="form-control" />
+                    <span asp-validation-for="LModel.Password" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" id="RecaptchaToken" name="RecaptchaToken" />
+
+                <button type="submit" class="btn btn-primary">Login</button>
+
+                <div class="text-center">
+                    <a asp-page="/ForgotPassword" class="text-secondary small">Forgot Password?</a>
+                </div>
+            </form>
+
+            <script>
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6Lc1L2gsAAAAANuefny0SjwBlnxGp8uRQLadfaxz', {action: 'login'}).then(function(token) {
+                        document.getElementById('RecaptchaToken').value = token;
+                    });
+                });
+            </script>
+
+        </div>
+    </div>
+</div>

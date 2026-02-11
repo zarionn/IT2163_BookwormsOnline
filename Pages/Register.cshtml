@@ -1,0 +1,129 @@
+﻿@page
+@model WebApplication1.Pages.RegisterModel
+@{
+}
+
+<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Register </h1>
+
+			<form method="post" enctype="multipart/form-data">
+				<div asp-validation-summary="All" class="text-danger"></div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.FirstName">First Name</label>
+					<input type="Text" asp-for="RModel.FirstName" class="form-control" />
+					<span asp-validation-for="RModel.FirstName" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.LastName">Last Name</label>
+					<input type="Text" asp-for="RModel.LastName" class="form-control" />
+					<span asp-validation-for="RModel.LastName" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.CreditCard">Credit Card</label>
+					<input type="Text" asp-for="RModel.CreditCard" class="form-control" />
+					<span asp-validation-for="RModel.CreditCard" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.MobileNo">Mobile No</label>
+					<input type="Text" asp-for="RModel.MobileNo" class="form-control" />
+					<span asp-validation-for="RModel.MobileNo" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.BillingAddress">Billing Address</label>
+					<input type="Text" asp-for="RModel.BillingAddress" class="form-control" />
+					<span asp-validation-for="RModel.BillingAddress" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.ShippingAddress">Shipping Address</label>
+					<input type="Text" asp-for="RModel.ShippingAddress" class="form-control" />
+					<span asp-validation-for="RModel.ShippingAddress" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Email">Email Address</label>
+					<input type="email" asp-for="RModel.Email" class="form-control" />
+					<span asp-validation-for="RModel.Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Password">Password</label>
+					<input type="password" asp-for="RModel.Password" class="form-control" />
+					<div class="mt-2">
+						<small class="text-muted">
+							Password must be at least 12 characters and include uppercase, lowercase, number, and special character.
+						</small>
+
+						<ul id="pwRules" class="small mt-2 mb-0">
+							<li id="pwLen" class="text-danger">At least 12 characters</li>
+							<li id="pwUpper" class="text-danger">At least 1 uppercase letter (A-Z)</li>
+							<li id="pwLower" class="text-danger">At least 1 lowercase letter (a-z)</li>
+							<li id="pwDigit" class="text-danger">At least 1 digit (0-9)</li>
+							<li id="pwSpecial" class="text-danger">At least 1 special character</li>
+						</ul>
+					</div>
+
+					<span asp-validation-for="RModel.Password" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.ConfirmPassword">Confirm Password</label>
+					<input type="password" asp-for="RModel.ConfirmPassword" class="form-control" />
+					<span asp-validation-for="RModel.ConfirmPassword" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Photo">Photo (.JPG only)</label>
+					<input asp-for="RModel.Photo" type="file" class="form-control" accept=".jpg,.jpeg" />
+					<span asp-validation-for="RModel.Photo" class="text-danger"></span>
+				</div>
+
+				
+
+				
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		const pwInput = document.getElementById("RModel_Password");
+
+		const pwLen = document.getElementById("pwLen");
+		const pwUpper = document.getElementById("pwUpper");
+		const pwLower = document.getElementById("pwLower");
+		const pwDigit = document.getElementById("pwDigit");
+		const pwSpecial = document.getElementById("pwSpecial");
+
+		function setRule(el, ok) {
+			el.classList.toggle("text-success", ok);
+			el.classList.toggle("text-danger", !ok);
+		}
+
+		function checkPw() {
+			const v = pwInput.value || "";
+			setRule(pwLen, v.length >= 12);
+			setRule(pwUpper, /[A-Z]/.test(v));
+			setRule(pwLower, /[a-z]/.test(v));
+			setRule(pwDigit, /\d/.test(v));
+			setRule(pwSpecial, /[^A-Za-z0-9]/.test(v));
+		}
+
+		pwInput.addEventListener("input", checkPw);
+		checkPw();
+	</script>
+}
